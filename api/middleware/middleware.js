@@ -1,4 +1,4 @@
-const Users = require('../users/users-model');
+const Users = require("../users/users-model");
 
 function logger(req, res, next) {
   const time = new Date();
@@ -21,14 +21,14 @@ function validateUserId(req, res, next) {
 }
 
 function validateUser(req, res, next) {
-  if (
-    !req.body.name
-  ) { next({status: 404, message: "missing required name field" })} 
- 
+  if (!req.body.name) {
+    next({ status: 400, message: "missing required name field" });
+  } else {
+    next()
+  }
 }
 
 function validatePost(req, res, next) {
-  // DO YOUR MAGIC
 }
 
 module.exports = { logger, validateUserId, validateUser, validatePost };
