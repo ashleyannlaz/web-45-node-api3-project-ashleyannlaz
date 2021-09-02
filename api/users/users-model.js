@@ -38,6 +38,7 @@ function update(id, changes) {
   return db('users')
     .where({ id })
     .update(changes)
+    // eslint-disable-next-line
     .then(rows => {
       return getById(id);
     });

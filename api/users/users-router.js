@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/:id", validateUserId, (req, res, next) => {
+router.get("/:id", validateUserId, (req, res) => {
   res.json(req.user);
 });
 
