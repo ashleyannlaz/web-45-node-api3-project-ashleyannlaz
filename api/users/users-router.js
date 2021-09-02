@@ -30,8 +30,9 @@ router.post("/", validateUser, (req, res, next) => {
 });
 
 router.put("/:id", validateUserId, validateUser, (req, res) => {
-  // RETURN THE FRESHLY UPDATED USER OBJECT
-  // and another middleware to check that the request body is valid
+  Users.update(req.params.id, req.body).then((user) => {
+    res.status(200).json(user);
+  });
 });
 
 router.delete("/:id", validateUserId, async (req, res, next) => {
@@ -59,9 +60,11 @@ router.post(
   validatePost,
   async (req, res, next) => {
     const postInfo = { user_id: req.params.id, text: req.body.text };
-    Posts.insert(postInfo).then(() => {
-      res.status(201).json(postInfo);
-    });
+    Posts.insert(postInfo)
+      .then(() => {
+        res.status(201).json(postInfo);
+      })
+      .catch(next);
   }
 );
 
